@@ -1,9 +1,17 @@
-import { defineConfig } from 'vite'
+/*import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-console.log('VITE_API:', process.env.VITE_API);
-console.log('VITE_API_KEY:', process.env.VITE_API_KEY);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+})*/
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  // Adicione a seguinte configuração para carregar as variáveis de ambiente
+  define: {
+    'process.env': process.env,
+  },
+});
