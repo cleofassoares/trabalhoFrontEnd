@@ -10,7 +10,7 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // Validar se o nome de usuário já existe
+    // Verifica se já existe um usuário com o mesmo nome
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
     const isExistingUser = existingUsers.some(user => user.username === username);
 
@@ -19,12 +19,12 @@ const Register = () => {
       return;
     }
 
-    // Adicionar novo usuário ao localStorage
+    // Adiciona o novo usuário ao localStorage
     const newUser = { username, password };
     const updatedUsers = [...existingUsers, newUser];
     localStorage.setItem('users', JSON.stringify(updatedUsers));
 
-    // Redirecionar para a página de login após o registro
+    // Redireciona para a página de login após o registro
     navigate('/login');
   };
 
