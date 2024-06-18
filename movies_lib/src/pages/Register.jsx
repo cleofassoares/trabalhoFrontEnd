@@ -1,34 +1,37 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
 
-    // Obter usuários do localStorage
+    // Validar se o nome de usuário já existe
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    const isExistingUser = existingUsers.some(user => user.username === username);
 
-    // Verificar se as credenciais são válidas
-    const user = existingUsers.find(user => user.username === username && user.password === password);
-
-    if (user) {
-      alert('Login successful!');
-      // Redirecionar para a página inicial após o login
-      navigate('/');
-    } else {
-      setError('Invalid username or password');
+    if (isExistingUser) {
+      setError('Username already exists. Please choose a different username.');
+      return;
     }
+
+    // Adicionar novo usuário ao localStorage
+    const newUser = { username, password };
+    const updatedUsers = [...existingUsers, newUser];
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+    // Redirecionar para a página de login após o registro
+    navigate('/login');
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="register-container">
+      <h2>Register</h2>
+      <form onSubmit={handleRegister}>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -49,11 +52,11 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
         {error && <div className="error-message">{error}</div>}
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
