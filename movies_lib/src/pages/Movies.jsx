@@ -33,7 +33,7 @@ const Movie = () => {
   }
 
   useEffect(() => {
-    const movieURL = `${moviesURL}${id}?${apiKey}`
+    const movieURL = `${moviesURL}${id}?${apiKey}&language=pt-BR`
     getMovie(movieURL)
   },[])
 
