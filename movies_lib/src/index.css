@@ -3,19 +3,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     background-color: #000;
-    color: #fff;
-}
-
-a {
+  }
+  
+  a {
     text-decoration: none;
-    color: #F7D354;
-    transition: .5s;
-}
-
-a:hover {
+    color: #f7d354;
+    transition: 0.5s;
+  }
+  
+  a:hover {
     color: #b8930c;
-}
+  }
